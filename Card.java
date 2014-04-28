@@ -1,11 +1,3 @@
-/**
- * Representation of a single playing card (from a standard 52 card deck). 
- * A card consists of a suit value and a rank value.  Once instantiated, the
- * Card object cannot change.
- *
- * @Jackie Horton
- */
-
 public class Card 
 {     
     // Constants     
@@ -22,23 +14,21 @@ public class Card
                             KING = 13;
                             
     // instance variables
-    private int suit;   // The suit of this card, one of the constants
-                              // SPADES, HEARTS, DIAMONDS, CLUBS.
+    private int suit;                                
                               
-    private int rank;  // The rank of this card, from 1 to 13.
+    private int rank;      
     
-    //private String image;
                              
    /**
    * Creates a new playing card.
    * @param suit the suit value of this card.
    * @param rank the rank rank of this card.
    */
-    public Card(int rank, int suit/*, String image*/) 
+    public Card(int rank, int suit) 
     {
         this.rank = rank;
         this.suit = suit;
-        //this.image = image;
+       
     }
     
    /**
@@ -117,7 +107,33 @@ public class Card
 
     public String toString() 
     {
-        return getRankAsString() + " of " + getSuitAsString();
+        String sRank = " ";
+        
+        if(rank > 1 && rank <= 10)
+         sRank = "" + rank;
+        else if (rank == ACE)
+         sRank = "ace";
+        else if (rank == JACK)
+         sRank = "jack";
+        else if (rank == QUEEN)
+         sRank = "queen";
+        else if (rank == KING)
+         sRank = "king";
+         
+        String sSuit = " ";
+        
+        if(suit == SPADES)
+            sSuit = "s";
+        else if (suit == HEARTS)
+            sSuit = "h";
+        else if (suit == DIAMONDS)
+            sSuit = "d";
+        else if (suit == CLUBS)
+            sSuit = "c";
+            
+        String str = sRank + sSuit;
+        
+        return str;
     }
     
    /**
@@ -133,6 +149,15 @@ public class Card
       else
          return true;
    }
+   
+   public boolean compareTo(Card otherCard ) 
+   {
+      if ( rank < otherCard.rank )
+         return false;
+      else
+         return true;
+   }
+   
 
 }
     

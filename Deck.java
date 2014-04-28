@@ -29,15 +29,19 @@ public class Deck
    
    public void shuffle()
    {
-      int randNum;
-      Card temp;
+      int randCard;
+      Card temp, card2;
       Random r = new Random();
       for (int i = 0; i < deck.size(); i++)
       {
-         randNum = r.nextInt(deck.size());
-         temp = deck.get(i);
-         deck.set(i,deck.get(randNum));
-         deck.set(randNum,temp);
+         randCard = r.nextInt(t)+1;
+         
+         temp = (Card)(deck.get(i));
+         card2 = (Card)(deck.get(randCard));
+         deck.add(i,card2);
+         deck.add(randCard,temp);
+         
+         t--;
       }      
    }
    
