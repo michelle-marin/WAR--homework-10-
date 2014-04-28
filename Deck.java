@@ -1,65 +1,58 @@
 import java.util.Random;
 public class Deck 
 {
-   final int CARDS_IN_DECK = 52;
-
-   Card [] deck;
-   int ct;
+   private static final int aCard = 1;
+   private int t = 52;
+   private int suits = 4;
+   private int ranks = 13;
+   
+   private ListArrayListBased deck = new ListArrayListBased();
+   
    public Deck()
    {
-      freshDeck();
-   }
-   public void freshDeck()
-   {
-      deck = new Card[CARDS_IN_DECK];
-      for (int r = Card.ACE; r<=Card.KING;r++)
+      //for loop for assigning a suit
+      for (int i=1; i <= suits; i++)
       {
-         for (int s=Card.SPADES;s<=Card.CLUBS;s++)
+         //for loop for assigning a rank
+         for (int j=1; j <= 14; j++)
          {
-            deck[ct]=new Card(r,s);
-            ct = ct + 1;
+            // make card object with suit and rank
+            Card card = new Card(i,j);
+            
+            //add card object to deck
+            deck.add(j,card);
          }
       }
-     
+       
+      shuffle();
+   }
    
-   }
-   public Card dealCard()
-   {
-      ct--;
-      return deck[ct];
-   }
-   public int cardsRemaining()
-   {  
-      return ct;
-   }
    public void shuffle()
    {
       int randNum;
       Card temp;
       Random r = new Random();
-      for (int i = 0; i < ct; i++)
+      for (int i = 0; i < deck.size(); i++)
       {
-         randNum = r.nextInt(ct);
-         temp = deck[i];
-         deck[i]=deck[randNum];
-         deck[randNum]=temp;
-      }
+         randNum = r.nextInt(deck.size());
+         temp = deck.get(i);
+         deck.set(i,deck.get(randNum));
+         deck.set(randNum,temp);
+      }      
    }
-   public boolean isEmpty()
+   
+   public Card draw()
    {
-      return (cardsRemaining() == 0);
+      Card card;
+      card = (Card)(deck.get(aCard));
+      deck.remove(aCard);
+      return card;
    }
-   public static void main(String [] args) 
+   
+   public int size()
    {
-      Deck deck = new Deck();
-      deck.shuffle();
-      int i = 0;
-//      while (deck.cardsRemaining() > 0)
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-      deck.freshDeck();
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-
+      return deck.size();
    }
+   
+   
 }

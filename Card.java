@@ -26,16 +26,19 @@ public class Card
                               // SPADES, HEARTS, DIAMONDS, CLUBS.
                               
     private int rank;  // The rank of this card, from 1 to 13.
+    
+    //private String image;
                              
    /**
    * Creates a new playing card.
    * @param suit the suit value of this card.
    * @param rank the rank rank of this card.
    */
-    public Card(int rank, int suit) 
+    public Card(int rank, int suit/*, String image*/) 
     {
         this.rank = rank;
         this.suit = suit;
+        //this.image = image;
     }
     
    /**

@@ -1,109 +1,47 @@
-public class Pile implements ListInterface  
+public class Pile extends Deck
 {
-
-    private Node head; 
-    private int numItems;
-
-    public Pile() 
-    {
-         numItems = 0;
-         head = null;
-    }
-
-   public boolean isEmpty() 
-   {
-  
-    return numItems == 0;
-    
-   }
+   private final int TOTAL = 52;
+   private ListArrayListBased pile;
    
-   public int size() 
+   public Pile(Deck deck)
    {
-
-      return numItems;
-
-   }
-
-   public void add(int index, Object item) throws ListIndexOutOfBoundsException 
-   {
-       if (index >= 1 && index <= numItems+1) 
-       {
-         if (index == 1) 
-         {
-           Node newNode = new Node(item, head);
-           head = newNode;
-         } 
-         else 
-         {
-           Node prev = find(index-1);
-
-           Node newNode = new Node(item, prev.getNext());
-           prev.setNext(newNode);
-           
-         } 
-         numItems++;
-       } 
-       else 
-       {
-         throw new ListIndexOutOfBoundsException("List index out of bounds on add");
-       } 
-   }
-
-   public Object get(int index) throws ListIndexOutOfBoundsException 
-   {
-       if (index >= 1 && index <= numItems)
-       {
-         // get reference to node, then data in node
-         Node curr = find(index);
-         Object dataItem = curr.getItem();
-         return dataItem;
-       } 
-       else 
-       {
-         throw new ListIndexOutOfBoundsException("List index out of bounds on get");
-       }
-   }
-   
-   public void remove(int index) throws ListIndexOutOfBoundsException 
-   {
-    if (index >= 1 && index <= numItems) {
-      if (index == 1) 
-      {
-        
-        head = head.getNext();
-      } 
-      else 
-      {
-        Node prev = find(index-1);
-        
-        Node curr = prev.getNext(); 
-        prev.setNext(curr.getNext());
-      }
+      pile = new ListArrayListBased();
       
-      numItems--;
-    } 
-    
-    else 
-    {
-      throw new ListIndexOutOfBoundsException("List index out of bounds on remove");
-    } 
-  }   
-
-  public void removeAll() 
-  {
-    head = null;
-    numItems = 0;
-  }
-  
-   private Node find(int index) 
+      for (int i=0; i<= TOTAL; i++)
+      {
+         Card card = deck.draw();
+         pile.add(i,card);
+         
+      } 
+   }
+   
+   public int size()
    {
-
-       Node curr = head;
-       for (int skip = 1; skip < index; skip++) 
-       {
-         curr = curr.getNext();
-       } 
-       return curr;
-   } 
-
+      return pile.size();
+   }
+   
+   public void add(int index, Card card)
+   {
+      pile.add(pile.size()+1,card);
+   }
+   
+   public Card draw()
+   {
+      Card card;
+      card = (Card)(pile.get(1));
+      pile.remove(1);
+      return card;
+   }
+   
+   public boolean isEmpty()
+   {
+      if (pile.isEmpty())
+      {
+         return true;
+      }
+      else
+      {
+         return false;
+      }
+   }
 } 
