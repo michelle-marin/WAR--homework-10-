@@ -105,7 +105,7 @@ public class Card
    * @return the name of the card.
    */
 
-    public String toString() 
+    public String getString() 
     {
         String sRank = " ";
         

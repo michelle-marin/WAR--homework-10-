@@ -11,7 +11,7 @@ public class War
    
    }
    
-   public Card drawCard(int i)
+   public Card draw(int i)
    {
      if (i==0)
        return (Card)(player1.draw());
@@ -72,6 +72,14 @@ public class War
       {
          System.out.println(list.get(i));
       }
+   }
+   
+   public boolean outOfCards(int i)
+   {
+      if (i==0)
+         return player1.isEmpty();
+      else
+         return player2.isEmpty();
    }
    
 }
