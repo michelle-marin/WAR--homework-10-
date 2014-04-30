@@ -63,7 +63,7 @@ public class WarGUI extends JFrame
       button2 = new JButton("Complete War");
       button2.addActionListener(new ButtonListener2());
       panel5.add(button2);
-      button2.setEnable(false);
+      button2.setEnabled(false);
       
       b = new ImageIcon("cardPics/back.jpg");
       p1 = new JLabel(b);
@@ -129,7 +129,7 @@ public class WarGUI extends JFrame
             flip();
             
             f1 = new ImageIcon("cardPics/"+card1+".jpg");
-            f2 = new ImageIcon("cardPics/"+card1+".jpg");
+            f2 = new ImageIcon("cardPics/"+card2+".jpg");
             
             p1.setIcon(f1);
             p2.setIcon(f2);
@@ -140,7 +140,7 @@ public class WarGUI extends JFrame
             status2.setText("Sorry you are out of cards. Computer wins");
             
             button1.setEnabled(false);
-            button2.setEnables(false);
+            button2.setEnabled(false);
          }
          
          else if (game.outOfCards(2))
@@ -148,11 +148,129 @@ public class WarGUI extends JFrame
             status2.setText("Computer is out of cards. You win!!");
             
             button1.setEnabled(false);
-            button2.setEnables(false);
+            button2.setEnabled(false);
          }
          
          status1.setText(game.toString());
       }
       
    }
+   
+   private class ButtonListener2 implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         button1.setEnabled(true);
+         button2.setEnabled(false);
+         
+         int statusWhile = 0;
+         
+         if(game.pileSize(0)>= WAR && game.pileSize(1) >= WAR)
+         {
+            do
+            {
+               if(game.pileSize(0)>= WAR && game.pileSize(1) >= WAR)
+               {
+                  Card rCard1, rCard2;
+                  
+                  for (int i=0; i<=WAR; i++)
+                  {
+                     rCard1 = game.draw(0);
+                     temp.add(0,rCard1);
+                     rCard2 = game.draw(1);
+                     temp.add(1,rCard2);
+                     
+                  }
+                 rCard1 = (Card)(temp.get(1));
+                 rCard2 = (Card)(temp.get(0));
+                 
+                 if(rCard1.compareTo(rCard2) == true)
+                 {
+                     f1 = new ImageIcon("cardPics/"+rCard1+".jpg");
+                     f2 = new ImageIcon("cardPics/"+rCard2+".jpg");
+                     
+                     p1.setIcon(f1);
+                     p2.setIcon(f2);
+                     
+                     Card tempCard;
+                     
+                     for(int i=0; i<=temp.size(); i++)
+                     {
+                        tempCard = (Card)(temp.get(i));
+                        game.add(0, tempCard);
+                     }
+                     
+                     temp.removeAll();
+                     
+                     statusWhile = 1;
+                     
+                     status1.setText(game.toString());
+                     status2.setText(rCard1.getString() + " is greater than "+
+                                       rCard2.getString()+ ". You won the WAR!!");
+                    
+                 }
+                 
+                 if(rCard1.compareTo(rCard2) == false)
+                 {
+                     f1 = new ImageIcon("cardPics/"+rCard1+".jpg");
+                     f2 = new ImageIcon("cardPics/"+rCard2+".jpg");
+                     
+                     p1.setIcon(f1);
+                     p2.setIcon(f2);
+                     
+                     Card tempCard;
+                     
+                     for(int i=0; i<=temp.size(); i++)
+                     {
+                        tempCard = (Card)(temp.get(i));
+                        game.add(1, tempCard);
+                     }
+                     
+                     temp.removeAll();
+                     
+                     statusWhile = 1;
+                     
+                     status1.setText(game.toString());
+                     status2.setText(rCard1.getString() + " is less than "+
+                                       rCard2.getString()+ ". You lost the War :(");
+                    
+                 }
+                 
+                 else
+                 {
+                    f1 = new ImageIcon("cardPics/"+rCard1+".jpg");
+                    f2 = new ImageIcon("cardPics/"+rCard2+".jpg");
+                     
+                     p1.setIcon(f1);
+                     p2.setIcon(f2);
+                     
+                     statusWhile = 0;
+                     
+                     status1.setText(game.toString());
+                     status2.setText(rCard1.getString() + " equal to "+
+                                       rCard2.getString()+ "....WAR!");
+                     
+                 }
+                 
+                  
+               }
+               
+               else if (game.pileSize(0) > game.pileSize(1))
+               {
+                  button1.setEnabled(false);
+                  button2.setEnabled(false);
+                  
+                  status2.setText("Computer ran out of cards. You win!!");
+               }
+               else if (game.pileSize(1) > game.pileSize(0))
+               {
+                  button1.setEnabled(false);
+                  button2.setEnabled(false);
+                  
+                  status2.setText("You ran out of cards. Computer Wins.");
+               }  
+         }while (statusWhile < 1);
+      }
+   }
+  }
 }

@@ -33,8 +33,7 @@ public class ListArrayListBased implements ListInterface
       }
       catch (IndexOutOfBoundsException e)
       {
-         throw new ListIndexOutOfBoundsException(
-                "List index out of bounds on get");
+         throw new ListIndexOutOfBoundsException("List index out of bounds on get");
       } // end if
    } // end get
    
