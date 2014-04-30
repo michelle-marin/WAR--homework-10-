@@ -26,7 +26,7 @@ public class WarGUI extends JFrame
       temp = new ListArrayListBased();
       
       setLayout(new GridLayout(2,3));
-      game =new War();
+      game = new War();
       
       panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
       panel1.setBackground(new Color(20,132,7));
@@ -86,12 +86,12 @@ public class WarGUI extends JFrame
    }
    public void flip()
    {
-      card1 = game.draw(0);
-      card2 = game.draw(1);
+      card1 = game.draw(1);
+      card2 = game.draw(2);
       
       if(card1.compareTo(card2) == true)
       {
-         game.add(0,card1,card2);
+         game.add(1,card1,card2);
          
          status1.setText(game.toString());
          status2.setText(card1.getString() + " is greater than " + 
@@ -101,7 +101,7 @@ public class WarGUI extends JFrame
       
       else if(card1.compareTo(card2) == false)
       {
-        game.add(1,card1,card2);
+        game.add(2,card1,card2);
          
          status1.setText(game.toString());
          status2.setText(card1.getString() + " is less than " + 
@@ -112,8 +112,8 @@ public class WarGUI extends JFrame
       {
          status2.setText(card1.getString()+" is equal to "+card2.getString()+"...WAR!");
          
-         temp.add(0, card1);
-         temp.add(1, card2);
+         temp.add(1, card1);
+         temp.add(2, card2);
          
          button1.setEnabled(false);
          button2.setEnabled(true);
@@ -124,7 +124,7 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {
-         if(!game.outOfCards(0) && !game.outOfCards(1))
+         if(!game.outOfCards(1) && !game.outOfCards(2))
          {
             flip();
             
@@ -135,7 +135,7 @@ public class WarGUI extends JFrame
             p2.setIcon(f2);
          }
          
-         else if (game.outOfCards(0))
+         else if (game.outOfCards(1))
          {
             status2.setText("Sorry you are out of cards. Computer wins");
             
@@ -165,24 +165,24 @@ public class WarGUI extends JFrame
          
          int statusWhile = 0;
          
-         if(game.pileSize(0)>= WAR && game.pileSize(1) >= WAR)
+         if(game.pileSize(1)>= WAR && game.pileSize(2) >= WAR)
          {
             do
             {
-               if(game.pileSize(0)>= WAR && game.pileSize(1) >= WAR)
+               if(game.pileSize(1)>= WAR && game.pileSize(2) >= WAR)
                {
                   Card rCard1, rCard2;
                   
                   for (int i=0; i<=WAR; i++)
                   {
-                     rCard1 = game.draw(0);
+                     rCard1 = game.draw(1);
                      temp.add(0,rCard1);
-                     rCard2 = game.draw(1);
+                     rCard2 = game.draw(2);
                      temp.add(1,rCard2);
                      
                   }
-                 rCard1 = (Card)(temp.get(1));
-                 rCard2 = (Card)(temp.get(0));
+                 rCard1 = (Card)(temp.get(2));
+                 rCard2 = (Card)(temp.get(1));
                  
                  if(rCard1.compareTo(rCard2) == true)
                  {
@@ -194,10 +194,10 @@ public class WarGUI extends JFrame
                      
                      Card tempCard;
                      
-                     for(int i=0; i<=temp.size(); i++)
+                     for(int i=1; i<=temp.size(); i++)
                      {
                         tempCard = (Card)(temp.get(i));
-                        game.add(0, tempCard);
+                        game.add(1, tempCard);
                      }
                      
                      temp.removeAll();
@@ -220,10 +220,10 @@ public class WarGUI extends JFrame
                      
                      Card tempCard;
                      
-                     for(int i=0; i<=temp.size(); i++)
+                     for(int i=1; i<=temp.size(); i++)
                      {
                         tempCard = (Card)(temp.get(i));
-                        game.add(1, tempCard);
+                        game.add(2, tempCard);
                      }
                      
                      temp.removeAll();
@@ -255,14 +255,14 @@ public class WarGUI extends JFrame
                   
                }
                
-               else if (game.pileSize(0) > game.pileSize(1))
+               else if (game.pileSize(1) > game.pileSize(2))
                {
                   button1.setEnabled(false);
                   button2.setEnabled(false);
                   
                   status2.setText("Computer ran out of cards. You win!!");
                }
-               else if (game.pileSize(1) > game.pileSize(0))
+               else if (game.pileSize(2) > game.pileSize(1))
                {
                   button1.setEnabled(false);
                   button2.setEnabled(false);

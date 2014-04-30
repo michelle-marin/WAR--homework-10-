@@ -13,7 +13,7 @@ public class War
    
    public Card draw(int i)
    {
-     if (i==0)
+     if (i==1)
        return (Card)(player1.draw());
    
      else
@@ -23,7 +23,7 @@ public class War
    
    public void add(int i, Card card)
    {
-      if(i==0)
+      if(i==1)
       {
          player1.add(player1.size()+1,card);
       }
@@ -35,7 +35,7 @@ public class War
    
    public void add(int i, Card card1, Card card2)
    {
-      if(i==0)
+      if(i==1)
       {
          player1.add(player1.size()+1,card1);
          player1.add(player1.size()+1,card2);
@@ -49,7 +49,7 @@ public class War
    
    public int pileSize(int i)
    {
-      if (i==0)
+      if (i==1)
          return player1.size();
       else
          return player2.size();
@@ -76,7 +76,7 @@ public class War
    
    public boolean outOfCards(int i)
    {
-      if (i==0)
+      if (i==1)
          return player1.isEmpty();
       else
          return player2.isEmpty();

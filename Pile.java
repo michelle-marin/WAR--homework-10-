@@ -1,13 +1,13 @@
 public class Pile extends Deck
 {
-   private final int TOTAL = 52;
+   private final int TOTAL = 26;
    private ListArrayListBased pile;
    
    public Pile(Deck deck)
    {
       pile = new ListArrayListBased();
       
-      for (int i=0; i<= TOTAL; i++)
+      for (int i=1; i<= TOTAL; i++)
       {
          Card card = deck.draw();
          pile.add(i,card);
