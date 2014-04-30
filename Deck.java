@@ -9,16 +9,16 @@ public class Deck
    public Deck()
    {
       //for loop for assigning a suit
-      for (int i=1; i <= suits; i++)
+      for (int i=1; i <= ranks; i++)
       {
          //for loop for assigning a rank
-         for (int j=1; j <= 13; j++)
+         for (int j=1; j <= suits; j++)
          {
             // make card object with suit and rank
             Card card = new Card(i,j);
             
             //add card object to deck
-            deck.add(j,card);
+            deck.add(i,card);
          }
       }
        
@@ -28,7 +28,7 @@ public class Deck
    public void shuffle()
    {
       int randCard;
-      int t =51;
+      int t = 51;
       Card temp, card2;
       Random r = new Random();
       for (int i = 1; i < deck.size(); i++)

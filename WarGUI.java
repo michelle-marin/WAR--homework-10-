@@ -17,8 +17,8 @@ public class WarGUI extends JFrame
       
    private JPanel panel1, panel2, panel3, panel4, panel5, panel6;  // break up regions
    private JButton button1, button2;    // grid of buttons
-   private JLabel status1, status2;  // game status
-   private JLabel title;   // static title
+   private JLabel title, status;  // game status
+   
 
 
    public WarGUI()
@@ -29,32 +29,25 @@ public class WarGUI extends JFrame
       game = new War();
       
       panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
-      panel1.setBackground(new Color(20,132,7));
+      panel1.setBackground(Color.GRAY);
       panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,50));
-      panel2.setBackground(new Color(20,132,7));
+      panel2.setBackground(Color.GRAY);
       panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
-      panel3.setBackground(new Color(20,132,7));
+      panel3.setBackground(Color.GRAY);
       panel4 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
-      panel4.setBackground(new Color(20,132,7));
+      panel4.setBackground(Color.GRAY);
       panel5 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,10));
-      panel5.setBackground(new Color(20,132,7));
+      panel5.setBackground(Color.GRAY);
       panel6 = new JPanel(new FlowLayout(FlowLayout.CENTER,50,50));
-      panel6.setBackground(new Color(20,132,7));
+      panel6.setBackground(Color.GRAY);
       
-      
-      // topPanel = new JPanel();
-//       topPanel.setBackground(Color.gray);
-//          
-//       title = new JLabel("Michelle Marin's  War Game");
-//       title.setFont(new Font("HELVETICA", Font.PLAIN, 36));
-//       topPanel.add(title);
          
-      status1 = new JLabel(game.toString());
-      status2 = new JLabel();
+      title = new JLabel(game.toString());
+      status = new JLabel();
       
-      status1.setFont(new Font("ARIAL",Font.BOLD,24));
-      panel2.add(status1);
-      panel2.add(status2);
+      title.setFont(new Font("ARIAL",Font.BOLD,24));
+      panel2.add(title);
+      panel2.add(status);
       
       button1 = new JButton("Draw a card");
       button1.addActionListener(new ButtonListener());
@@ -89,28 +82,26 @@ public class WarGUI extends JFrame
       card1 = game.draw(1);
       card2 = game.draw(2);
       
-      if(card1.compareTo(card2) == true)
+      if(card1.compareTo(card2) == 1)
       {
          game.add(1,card1,card2);
          
-         status1.setText(game.toString());
-         status2.setText(card1.getString() + " is greater than " + 
-                         card2.getString()+ ". You won the batle! (+1 card)");
+         title.setText(game.toString());
+         status.setText("You won the batle! (+1 card)");
                          
       }
       
-      else if(card1.compareTo(card2) == false)
+      else if(card1.compareTo(card2) == -1)
       {
         game.add(2,card1,card2);
          
-         status1.setText(game.toString());
-         status2.setText(card1.getString() + " is less than " + 
-                         card2.getString()+ ". You lose the batle :( (-1 card)"); 
+         title.setText(game.toString());
+         status.setText("You lose the batle :( (-1 card)"); 
       }
       
-      else if(card1.equals(card2))
+      else if(card1.compareTo(card2) == 0)
       {
-         status2.setText(card1.getString()+" is equal to "+card2.getString()+"...WAR!");
+         status.setText("...WAR!");
          
          temp.add(1, card1);
          temp.add(2, card2);
@@ -127,17 +118,18 @@ public class WarGUI extends JFrame
          if(!game.outOfCards(1) && !game.outOfCards(2))
          {
             flip();
-            
-            f1 = new ImageIcon("cardPics/"+card1+".jpg");
+            String s = "cardPics/"+card1+".jpg";
+            f1 = new ImageIcon(s);
             f2 = new ImageIcon("cardPics/"+card2+".jpg");
             
             p1.setIcon(f1);
             p2.setIcon(f2);
+
          }
          
          else if (game.outOfCards(1))
          {
-            status2.setText("Sorry you are out of cards. Computer wins");
+            status.setText("Sorry you are out of cards. Computer wins");
             
             button1.setEnabled(false);
             button2.setEnabled(false);
@@ -145,13 +137,13 @@ public class WarGUI extends JFrame
          
          else if (game.outOfCards(2))
          {
-            status2.setText("Computer is out of cards. You win!!");
+            status.setText("Computer is out of cards. You win!!");
             
             button1.setEnabled(false);
             button2.setEnabled(false);
          }
          
-         status1.setText(game.toString());
+         title.setText(game.toString());
       }
       
    }
@@ -173,18 +165,18 @@ public class WarGUI extends JFrame
                {
                   Card rCard1, rCard2;
                   
-                  for (int i=0; i<=WAR; i++)
+                  for (int i=1; i<=WAR; i++)
                   {
                      rCard1 = game.draw(1);
-                     temp.add(0,rCard1);
+                     temp.add(1,rCard1);
                      rCard2 = game.draw(2);
-                     temp.add(1,rCard2);
+                     temp.add(2,rCard2);
                      
                   }
                  rCard1 = (Card)(temp.get(2));
                  rCard2 = (Card)(temp.get(1));
                  
-                 if(rCard1.compareTo(rCard2) == true)
+                 if(rCard1.compareTo(rCard2) == 1)
                  {
                      f1 = new ImageIcon("cardPics/"+rCard1+".jpg");
                      f2 = new ImageIcon("cardPics/"+rCard2+".jpg");
@@ -204,13 +196,12 @@ public class WarGUI extends JFrame
                      
                      statusWhile = 1;
                      
-                     status1.setText(game.toString());
-                     status2.setText(rCard1.getString() + " is greater than "+
-                                       rCard2.getString()+ ". You won the WAR!!");
+                     title.setText(game.toString());
+                     status.setText("You won the WAR!!");
                     
                  }
                  
-                 if(rCard1.compareTo(rCard2) == false)
+                 if(rCard1.compareTo(rCard2) == -1)
                  {
                      f1 = new ImageIcon("cardPics/"+rCard1+".jpg");
                      f2 = new ImageIcon("cardPics/"+rCard2+".jpg");
@@ -230,9 +221,8 @@ public class WarGUI extends JFrame
                      
                      statusWhile = 1;
                      
-                     status1.setText(game.toString());
-                     status2.setText(rCard1.getString() + " is less than "+
-                                       rCard2.getString()+ ". You lost the War :(");
+                     title.setText(game.toString());
+                     status.setText("You lost the War :(");
                     
                  }
                  
@@ -246,9 +236,8 @@ public class WarGUI extends JFrame
                      
                      statusWhile = 0;
                      
-                     status1.setText(game.toString());
-                     status2.setText(rCard1.getString() + " equal to "+
-                                       rCard2.getString()+ "....WAR!");
+                     title.setText(game.toString());
+                     status.setText("WAR!..again");
                      
                  }
                  
@@ -260,14 +249,14 @@ public class WarGUI extends JFrame
                   button1.setEnabled(false);
                   button2.setEnabled(false);
                   
-                  status2.setText("Computer ran out of cards. You win!!");
+                  status.setText("Computer ran out of cards. You win!!");
                }
                else if (game.pileSize(2) > game.pileSize(1))
                {
                   button1.setEnabled(false);
                   button2.setEnabled(false);
                   
-                  status2.setText("You ran out of cards. Computer Wins.");
+                  status.setText("You ran out of cards. Computer Wins.");
                }  
          }while (statusWhile < 1);
       }

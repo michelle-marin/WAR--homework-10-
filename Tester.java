@@ -8,7 +8,7 @@ public class Tester
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
       frame.setTitle("War game");
-      frame.setSize(12,6);
+      frame.setSize(1000,700);
       frame.validate();
       frame.setVisible(true);
    }

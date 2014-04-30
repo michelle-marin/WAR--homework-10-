@@ -2,10 +2,10 @@ public class Card
 {     
     // Constants     
     // suits
-    public final static int SPADES = 0,      
-                            HEARTS = 1,
-                            DIAMONDS = 2,
-                            CLUBS = 3;
+    public final static int SPADES = 1,      
+                            HEARTS = 2,
+                            DIAMONDS = 3,
+                            CLUBS = 4;
     // ranks
     // Cards 2 through 9 have face value
     public final static int ACE = 1,          
@@ -105,7 +105,7 @@ public class Card
    * @return the name of the card.
    */
 
-    public String getString() 
+    public String toString() 
     {
         String sRank = " ";
         
@@ -142,20 +142,16 @@ public class Card
    * @return true if the two cards have the same rank and suitvalues,
    * falseotherwise.
    */
-   public boolean equals(Card otherCard ) 
-   {
-      if ( ( rank != otherCard.rank ) || ( suit != otherCard.suit ) )
-         return false;
-      else
-         return true;
-   }
+
    
-   public boolean compareTo(Card otherCard ) 
+   public int compareTo(Card otherCard ) 
    {
-      if ( rank < otherCard.rank )
-         return false;
+      if ( this.rank < otherCard.rank )
+         return -1;
+      else if (rank > otherCard.rank)
+         return 1;
       else
-         return true;
+         return 0;
    }
    
 
