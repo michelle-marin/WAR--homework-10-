@@ -1,3 +1,4 @@
+//By Jackie Horton used by Michelle Marin
 public class Node {
   private Object item;
   private Node next;

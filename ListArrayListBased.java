@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//By Jackie Horton used by Michelle Marin
 // ****************************************************
 // Array list-based implementation of ADT list.
 // ****************************************************
